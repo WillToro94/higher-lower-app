@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="William Toro">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!--Static Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <title>High Low</title>
+  </head>
+  <body>
+    <h1>Higher or Lower</h1>
+    <h6 class="intro-text">Who has the higher Instagram count?</h6>
+
+
+
+    <div class="choice">
+      <h2>A: {{ a.name }}</h2>
+      <p class="description-country">{{ a.description }} from {{ a.country }}</p>
+    </div>
+
+    <p class="versus">VS</p>
+
+    <div class="choice">
+      <h2>B: {{ b.name }}</h2>
+      <p class="description-country">{{ b.description }} from {{ b.country }}</p>
+    </div>
+
+    <form method="POST">
+      <button type="submit" name="choice" value="A" {% if game_over %} disabled {% endif %}>Choice A</button>
+      <button type="submit" name="choice" value="B" {% if game_over %} disabled {% endif %}>Choice B</button>
+
+    </form>
+
+    <br>
+    {% if feedback %}
+      <p class="feedback">{{ feedback }}</p>
+    {% endif %}
+
+    <!-- Restart button -->
+    <form action="{{ url_for('restart') }}" method="get">
+      <button type="submit" class="restart">Restart Game</button>
+    </form>
+  </body>
+</html>
